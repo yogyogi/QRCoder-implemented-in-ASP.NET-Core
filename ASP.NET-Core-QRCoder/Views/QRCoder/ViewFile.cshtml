@@ -1,0 +1,124 @@
+﻿@model List<KeyValuePair<string, Byte[]>>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Implementing QRCoder in ASP.NET Core - View QR Code Files</title>
+    <style>
+        body {
+            background: #111 no-repeat;
+            background-image: -webkit-gradient(radial, 50% 0, 150, 50% 0, 300, from(#444), to(#111));
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #FFF;
+            margin: 5px 0;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        h2 a {
+            font-size: 25px;
+            color: #0184e3;
+            text-decoration: none;
+        }
+
+        h3 {
+            font-size: 23px;
+            border-bottom: solid 3px #CCC;
+            padding-bottom: 10px;
+        }
+
+            h3 a {
+                color: #00e8ff;
+                text-decoration: none;
+            }
+
+                h3 a:hover, h2 a:hover {
+                    text-decoration: underline;
+                }
+
+        .container {
+            width: 800px;
+            margin: auto;
+            color: #FFF;
+            font-size: 25px;
+        }
+
+            .container #content {
+                border: dashed 2px #CCC;
+                padding: 10px;
+            }
+
+        #reset {
+            padding: 5px 10px;
+            background: #4CAF50;
+            border: none;
+            color: #FFF;
+            cursor: pointer;
+        }
+
+            #reset:hover {
+                color: #4CAF50;
+                background: #FFF;
+            }
+
+        #viewContent table {
+            width: 100%;
+        }
+
+            #viewContent table tr {
+                height: 80px;
+                background: darkcyan;
+            }
+
+                #viewContent table tr td {
+                    width: 50%;
+                    padding-left: 5px;
+                }
+
+                    #viewContent table tr td img {
+                        width: 150px;
+                    }
+
+                    #viewContent table tr td span {
+                        display: block;
+                    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="content">
+            <h1>Implementing QRCoder in ASP.NET Core - View QR Code Files</h1>
+            <h2>
+                <a href="http://www.yogihosting.com/category/aspnet-core/">Read the tutorial on YogiHosting » </a>
+                <button id="reset" onclick="location=''">Reset »</button>
+            </h2>
+            <div id="viewContent">
+                <table>
+                    <tbody>
+                        @foreach (KeyValuePair<string, Byte[]> k in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(k.Value))" />
+                                    <span>@k.Key</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

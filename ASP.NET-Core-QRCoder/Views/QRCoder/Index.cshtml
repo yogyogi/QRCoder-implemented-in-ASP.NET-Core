@@ -1,0 +1,130 @@
+﻿@model Byte[]
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Implementing QRCoder in ASP.NET Core - Create QR Code</title>
+    <style>
+        body {
+            background: #111 no-repeat;
+            background-image: -webkit-gradient(radial, 50% 0, 150, 50% 0, 300, from(#444), to(#111));
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            color: #FFF;
+            margin: 5px 0;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        h2 a {
+            font-size: 25px;
+            color: #0184e3;
+            text-decoration: none;
+        }
+
+        h3 {
+            font-size: 23px;
+            border-bottom: solid 3px #CCC;
+            padding-bottom: 10px;
+        }
+
+            h3 a {
+                color: #00e8ff;
+                text-decoration: none;
+            }
+
+                h3 a:hover, h2 a:hover {
+                    text-decoration: underline;
+                }
+
+        .container {
+            width: 800px;
+            margin: auto;
+            color: #FFF;
+            font-size: 25px;
+        }
+
+            .container #content {
+                border: dashed 2px #CCC;
+                padding: 10px;
+            }
+
+        #reset {
+            padding: 5px 10px;
+            background: #4CAF50;
+            border: none;
+            color: #FFF;
+            cursor: pointer;
+        }
+
+            #reset:hover {
+                color: #4CAF50;
+                background: #FFF;
+            }
+
+        #viewContent table {
+            width: 100%;
+        }
+
+            #viewContent table tr {
+                height: 80px;
+                background: darkcyan;
+            }
+
+                #viewContent table tr td {
+                    width: 50%;
+                    padding-left: 5px;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="content">
+            <h1>Implementing QRCoder in ASP.NET Core - Create QR Code</h1>
+            <h2>
+                <a href="http://www.yogihosting.com/category/aspnet-core/">Read the tutorial on YogiHosting » </a>
+                <button id="reset" onclick="location=''">Reset »</button>
+            </h2>
+            <div id="viewContent">
+                @using (Html.BeginForm(null, null, FormMethod.Post))
+                {
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label>Enter text for creating QR Code</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="qrText" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <button>Submit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+            @{
+                if (Model != null)
+                {
+                    <h3>QR Code Successfully Generated</h3>
+                    <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model))" />
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>
+
